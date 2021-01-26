@@ -5,11 +5,13 @@ import data from './data';
 import ListItem from './components/ListItem';
 import ListForm from './components/ListForm';
 import FilterItem from './components/FilterItem';
+import SearchItem from './components/SearchItem';
 
 const App = () => {
   const [items, setItems] = useState(data);
   const [totalItemCount, setTotalItemCount] = useState(0);
   const [filterName, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const calculateTotal = () => {
     const totalItemCount = items.reduce((total, item) => {
       return total + item.quantity * item.price;
@@ -23,12 +25,19 @@ const App = () => {
       <GlobalStyle />
       <div className='app-background'>
         <div className='main-container'>
-          <FilterItem
-            setFilter={setFilter}
-            items={items}
-            filterName={filterName}
-            setItems={setItems}
-          />
+          <div className='top-filter'>
+            <SearchItem
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              setItems={setItems}
+            />
+            <FilterItem
+              setFilter={setFilter}
+              items={items}
+              filterName={filterName}
+              setItems={setItems}
+            />
+          </div>
           <ListForm
             items={items}
             setItems={setItems}
@@ -80,6 +89,10 @@ const AppStyle = styled.div`
   .total {
     float: right;
     padding: 10px;
+  }
+  .top-filter {
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
