@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import GlobalStyle from './components/GlobalStyle';
 import styled from 'styled-components';
-
+import data from './data';
 import ListItem from './components/ListItem';
 import ListForm from './components/ListForm';
-const initialState = {
-  itemName: 'Apple',
-  quantity: 1,
-  price: 10,
-  isSelected: false,
-  category: 'Grocery',
-};
+import FilterItem from './components/FilterItem';
+
 const App = () => {
-  const [items, setItems] = useState([initialState]);
+  const [items, setItems] = useState(data);
   const [totalItemCount, setTotalItemCount] = useState(0);
+  const [filterName, setFilter] = useState('all');
   const calculateTotal = () => {
     const totalItemCount = items.reduce((total, item) => {
       return total + item.quantity * item.price;
@@ -21,11 +17,18 @@ const App = () => {
 
     setTotalItemCount(totalItemCount);
   };
+
   return (
     <AppStyle>
       <GlobalStyle />
       <div className='app-background'>
         <div className='main-container'>
+          <FilterItem
+            setFilter={setFilter}
+            items={items}
+            filterName={filterName}
+            setItems={setItems}
+          />
           <ListForm
             items={items}
             setItems={setItems}

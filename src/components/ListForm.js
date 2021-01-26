@@ -68,6 +68,7 @@ const ListForm = ({ items, setItems, setTotalItemCount, calculateTotal }) => {
           </option>
         ))}
       </select>
+
       <FontAwesomeIcon icon={faPlus} onClick={handleSubmit} />
     </FormStyle>
   );
