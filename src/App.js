@@ -2,17 +2,52 @@ import React, { useState } from 'react';
 import GlobalStyle from './components/GlobalStyle';
 import styled from 'styled-components';
 
-function App() {
+import ListItem from './components/ListItem';
+import ListForm from './components/ListForm';
+const initialState = {
+  itemName: 'Apple',
+  quantity: 1,
+  price: 10,
+  isSelected: false,
+  category: 'Grocery',
+};
+const App = () => {
+  const [items, setItems] = useState([initialState]);
+  const [totalItemCount, setTotalItemCount] = useState(0);
+  const calculateTotal = () => {
+    const totalItemCount = items.reduce((total, item) => {
+      return total + item.quantity * item.price;
+    }, 0);
+
+    setTotalItemCount(totalItemCount);
+  };
   return (
     <AppStyle>
       <GlobalStyle />
-      <h1>Hello World</h1>
+      <div className='app-background'>
+        <div className='main-container'>
+          <ListForm
+            items={items}
+            setItems={setItems}
+            setTotalItemCount={setTotalItemCount}
+            totalItemCount={totalItemCount}
+            calculateTotal={calculateTotal}
+          />
+          <ListItem
+            data={items}
+            setItems={setItems}
+            setTotalItemCount={setTotalItemCount}
+          />
+          <div className='total'>Total: ${totalItemCount}</div>
+        </div>
+      </div>
     </AppStyle>
   );
-}
+};
 
 const AppStyle = styled.div`
   font-family: sans-serif;
+  /* text-align: center; */
   .app-background {
     background-color: #6d6d6d;
     display: flex;
