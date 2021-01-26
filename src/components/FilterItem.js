@@ -8,8 +8,6 @@ const FilterItem = ({ setFilter, filterName, setItems }) => {
   };
   useEffect(() => {
     const filterList = data.filter((data) => data.category === filterName);
-    console.log(filterList);
-    console.log(filterName);
     filterName === 'all' ? setItems(data) : setItems(filterList);
   }, [filterName, setItems]);
 
