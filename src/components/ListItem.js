@@ -19,14 +19,14 @@ const ListItem = ({ data, setItems, setTotalItemCount }) => {
     return 0;
   });
 
-  const handelQuantityIncreate = (i) => {
+  const handelQuantityIncrease = (i) => {
     const newItems = [...data];
     newItems[i].quantity++;
     setItems(newItems);
     calculateTotal();
   };
 
-  const handelQuantityDecreate = (i) => {
+  const handelQuantityDecrease = (i) => {
     const newItems = [...data];
     if (newItems[i].quantity > 0) newItems[i].quantity--;
     setItems(newItems);
@@ -63,14 +63,14 @@ const ListItem = ({ data, setItems, setTotalItemCount }) => {
             <button>
               <FontAwesomeIcon
                 icon={faChevronLeft}
-                onClick={() => handelQuantityDecreate(i)}
+                onClick={() => handelQuantityDecrease(i)}
               />
             </button>
             <span> {d.quantity} </span>
             <button>
               <FontAwesomeIcon
                 icon={faChevronRight}
-                onClick={() => handelQuantityIncreate(i)}
+                onClick={() => handelQuantityIncrease(i)}
               />
             </button>
           </div>
